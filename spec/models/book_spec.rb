@@ -23,5 +23,11 @@ RSpec.describe Book, type: :model do
       book.genre = nil
       expect(book).to_not be_valid
     end
+
+    it 'will raise an exception if the book already exists on DB' do
+      Book.create!(title: 'Book_one', author: 'Author_one', genre: 'genre_one')
+      book = Book.new(title: 'Book_one', author: 'Author_one', genre: 'genre_one')
+      expect { book.save! }.to raise_error(ActiveRecord::RecordInvalid, 'Validation failed: Title already registered')
+    end
   end
 end
