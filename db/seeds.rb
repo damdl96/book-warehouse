@@ -8,4 +8,10 @@ end
   FactoryBot.create(:store)
 end
 
+40.times do
+  books = Book.all
+  stores = Store.all
+  FactoryBot.create(:inventory, store: stores.sample, book: books.sample)
+end
+
 Faker::UniqueGenerator.clear
