@@ -3,8 +3,8 @@
 require 'rails_helper'
 
 RSpec.describe Book, type: :model do
-  let(:book) { build :book }
   describe 'validations' do
+    let(:book) { build :book }
     it 'is valid if all the attributes are present' do
       expect(book).to be_valid
     end
@@ -28,6 +28,22 @@ RSpec.describe Book, type: :model do
       Book.create!(title: 'Book_one', author: 'Author_one', genre: 'genre_one')
       book = Book.new(title: 'Book_one', author: 'Author_one', genre: 'genre_one')
       expect { book.save! }.to raise_error(ActiveRecord::RecordInvalid, 'Validation failed: Title already registered')
+    end
+  end
+
+  describe 'associations' do
+    before do
+      @book = create(:book)
+      store = create(:store)
+      create(:inventory, book: @book, store:)
+    end
+
+    it 'has many inventories' do
+      expect(@book.inventories.first).to be_instance_of(Inventory)
+    end
+
+    it 'has many stores through inventories' do
+      expect(@book.stores.first).to be_instance_of(Store)
     end
   end
 end
