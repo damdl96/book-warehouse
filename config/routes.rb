@@ -1,12 +1,11 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  ActiveAdmin.routes(self)
   mount_devise_token_auth_for 'User', at: 'auth'
   resources :inventories
   resources :stores
   resources :books
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  root 'admin/dashboard#index'
 end
