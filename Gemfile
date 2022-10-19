@@ -41,6 +41,15 @@ gem 'rack-cors'
 # used for authentication [https://github.com/lynndylanhurley/devise_token_auth]
 gem 'devise_token_auth'
 
+# to create an admin UI [https://github.com/activeadmin/activeadmin]
+gem 'activeadmin'
+
+# Dependency for activeadmin [https://github.com/rails/sprockets]
+gem 'sprockets-rails', require: 'sprockets/railtie'
+
+# Dependency for activeadmin [https://github.com/sass/sassc-rails]
+gem 'sassc-rails'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri mingw x64_mingw]

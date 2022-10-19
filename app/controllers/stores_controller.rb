@@ -1,4 +1,4 @@
 # frozen_string_literal: true
 
-class StoresController < ApplicationController
+class StoresController < ApiController
 end
