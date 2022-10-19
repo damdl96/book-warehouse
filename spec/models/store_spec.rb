@@ -5,6 +5,7 @@ require 'rails_helper'
 RSpec.describe Store, type: :model do
   describe 'validations' do
     let(:store) { build :store }
+
     it 'is valid if all the attributes are present' do
       expect(store).to be_valid
     end
@@ -15,8 +16,8 @@ RSpec.describe Store, type: :model do
     end
 
     it 'raises an exception if the store already exist on DB' do
-      Store.create!(name: 'Indigo')
-      store = Store.new(name: 'Indigo')
+      create(:store, name: 'Indigo')
+      store = build(:store, name: 'Indigo')
       expect do
         store.save!
       end.to raise_error(ActiveRecord::RecordInvalid, 'Validation failed: Name has already been associated')
@@ -24,18 +25,23 @@ RSpec.describe Store, type: :model do
   end
 
   describe 'associations' do
+    let(:store) { create :store }
+    let(:book) { create :book }
     before do
-      @store = create(:store)
-      book = create(:book)
-      create(:inventory, book:, store: @store)
+      create(:inventory, product: book, store:)
+      create(:user, store:)
     end
 
     it 'has many inventories' do
-      expect(@store.inventories.first).to be_instance_of(Inventory)
+      expect(store.inventories.first).to be_instance_of(Inventory)
     end
 
-    it 'has many stores through inventories' do
-      expect(@store.books.first).to be_instance_of(Book)
+    it 'has many books through inventories' do
+      expect(store.books.first).to be_instance_of(Book)
+    end
+
+    it 'has many users through inventories' do
+      expect(store.users.first).to be_instance_of(User)
     end
   end
 end

@@ -12,7 +12,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 20_221_019_013_250) do
+ActiveRecord::Schema[7.0].define(version: 20_221_019_150_340) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
 
@@ -41,11 +41,12 @@ ActiveRecord::Schema[7.0].define(version: 20_221_019_013_250) do
 
   create_table 'inventories', force: :cascade do |t|
     t.integer 'quantity', default: 0, null: false
-    t.bigint 'book_id'
-    t.bigint 'store_id'
+    t.string 'product_type'
+    t.bigint 'product_id'
+    t.bigint 'store_id', null: false
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
-    t.index ['book_id'], name: 'index_inventories_on_book_id'
+    t.index %w[product_type product_id], name: 'index_inventories_on_product'
     t.index ['store_id'], name: 'index_inventories_on_store_id'
   end
 
@@ -73,12 +74,13 @@ ActiveRecord::Schema[7.0].define(version: 20_221_019_013_250) do
     t.json 'tokens'
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
+    t.bigint 'store_id', null: false
     t.index ['confirmation_token'], name: 'index_users_on_confirmation_token', unique: true
     t.index ['email'], name: 'index_users_on_email', unique: true
     t.index ['reset_password_token'], name: 'index_users_on_reset_password_token', unique: true
     t.index %w[uid provider], name: 'index_users_on_uid_and_provider', unique: true
   end
 
-  add_foreign_key 'inventories', 'books'
   add_foreign_key 'inventories', 'stores'
+  add_foreign_key 'users', 'stores'
 end

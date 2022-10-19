@@ -5,11 +5,16 @@ require 'rails_helper'
 RSpec.describe Inventory, type: :model do
   let(:book) { create :book }
   let(:store) { create :store }
-  let(:inventory) { build :inventory, book:, store: }
 
-  describe 'asociations' do
-    it 'is not valid without a book' do
-      inventory.book_id = nil
+  describe 'validations' do
+    let(:inventory) { build :inventory, product: book, store: }
+
+    it 'is valid if all the attributes are present' do
+      expect(inventory).to be_valid
+    end
+
+    it 'is not valid without a quantity' do
+      inventory.quantity = nil
       expect(inventory).not_to be_valid
     end
 
@@ -19,14 +24,15 @@ RSpec.describe Inventory, type: :model do
     end
   end
 
-  describe 'validations' do
-    it 'is valid if all the attributes are present' do
-      expect(inventory).to be_valid
+  describe 'asociations' do
+    let(:inventory) { create :inventory, product: book, store: }
+
+    it 'has one product' do
+      expect(inventory.product).to be_instance_of(Book)
     end
 
-    it 'is not valid without an quantity' do
-      inventory.quantity = nil
-      expect(inventory).not_to be_valid
+    it 'has one store' do
+      expect(inventory.store).to be_instance_of(Store)
     end
   end
 end

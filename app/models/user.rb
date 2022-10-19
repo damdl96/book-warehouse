@@ -7,4 +7,6 @@ class User < ActiveRecord::Base
   include DeviseTokenAuth::Concerns::User
 
   validates_presence_of :first_name
+
+  belongs_to :store
 end
