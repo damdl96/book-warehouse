@@ -5,5 +5,6 @@ class Store < ApplicationRecord
   validates :name, uniqueness: { message: 'has already been associated' }
 
   has_many :inventories
-  has_many :books, through: :inventories
+  has_many :books, through: :inventories, source: :product, source_type: 'Book'
+  has_many :users
 end

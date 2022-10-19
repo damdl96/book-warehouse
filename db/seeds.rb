@@ -10,16 +10,17 @@ puts 'creating stores...'
   FactoryBot.create(:store)
 end
 
+books = Book.all
+stores = Store.all
+
 puts 'creating inventories...'
 40.times do
-  books = Book.all
-  stores = Store.all
-  FactoryBot.create(:inventory, store: stores.sample, book: books.sample)
+  FactoryBot.create(:inventory, store: stores.sample, product: books.sample)
 end
 
 puts 'creating users...'
 10.times do
-  FactoryBot.create(:user)
+  FactoryBot.create(:user, store: stores.sample)
 end
 
 Faker::UniqueGenerator.clear
