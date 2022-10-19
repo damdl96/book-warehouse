@@ -1,4 +1,4 @@
 # frozen_string_literal: true
 
-class InventoriesController < ApplicationController
+class InventoriesController < ApiController
 end
