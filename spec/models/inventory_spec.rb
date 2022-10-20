@@ -22,6 +22,14 @@ RSpec.describe Inventory, type: :model do
       inventory.store = nil
       expect(inventory).not_to be_valid
     end
+
+    it 'will raise an exception if the inventory already exists' do
+      create(:inventory, product: book, store:)
+      inventory = build(:inventory, product: book, store:)
+      expect do
+        inventory.save!
+      end.to raise_error(ActiveRecord::RecordInvalid, 'Validation failed: Product already registered')
+    end
   end
 
   describe 'asociations' do
@@ -33,6 +41,16 @@ RSpec.describe Inventory, type: :model do
 
     it 'has one store' do
       expect(inventory.store).to be_instance_of(Store)
+    end
+  end
+
+  describe 'class methods' do
+    let!(:inventory) { create :inventory, product: book, store: }
+    context '#with_products' do
+      it 'loads the product model within the same object' do
+        product_title = Inventory.with_products(store_id: store.id).first.product.title
+        expect(product_title).to eq book.title
+      end
     end
   end
 end
