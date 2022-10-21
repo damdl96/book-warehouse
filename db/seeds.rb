@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+puts "\n== Seeding database =="
+
 puts 'creating books...'
 50.times do
   FactoryBot.create(:book)
@@ -14,8 +16,9 @@ books = Book.all
 stores = Store.all
 
 puts 'creating inventories...'
-40.times do
-  FactoryBot.create(:inventory, store: stores.sample, product: books.sample)
+100.times do
+  inv = FactoryBot.build(:inventory, store: stores.sample, product: books.sample)
+  inv.save! if inv.valid?
 end
 
 puts 'creating users...'
@@ -24,4 +27,4 @@ puts 'creating users...'
 end
 
 Faker::UniqueGenerator.clear
-puts '== seeds created successfully =='
+puts 'COMPLETED'
