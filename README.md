@@ -45,3 +45,4 @@ $ bin/setup
 ```
 🎉 Now you can use the app!
 
+*For more information on how to use the application check the project **how-to-use.md** file.*

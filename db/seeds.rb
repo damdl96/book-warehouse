@@ -27,4 +27,4 @@ puts 'creating users...'
 end
 
 Faker::UniqueGenerator.clear
-puts "COMPLETED"
+puts 'COMPLETED'
