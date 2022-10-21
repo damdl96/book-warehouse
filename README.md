@@ -1,24 +1,47 @@
-# README
+# Book Warehouse
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Application requirements
 
-Things you may want to cover:
+- Ruby 3.1.0
+- Rails 7.0.4
+- Postgresql 14.5
 
-* Ruby version
+## Setup
 
-* System dependencies
+### Clone this repository
 
-* Configuration
+- HTTP
+  ```
+  $ git clone https://github.com/damdl96/book-warehouse.git
+  ```
+- SSH
+  ```
+  $ git@github.com:damdl96/book-warehouse.git
+  ```
+- github CLI
+  ```
+  $ gh repo clone damdl96/book-warehouse
+  ```
 
-* Database creation
+### Application requirements
 
-* Database initialization
+Make sure you comply with the application requirements:
+```
+$ psql --version
+> psql (PostgreSQL) 14.5
 
-* How to run the test suite
+$ ruby -v
+> ruby 3.1.0
+```
+if not, you can install them by following the next guidelines:
+- [Download postgres](https://www.postgresql.org/download/)
+- [Download ruby](https://www.ruby-lang.org/en/documentation/installation/)
 
-* Services (job queues, cache servers, search engines, etc.)
+### Setting up the application
 
-* Deployment instructions
+Make sure that you're on the project folder and run:
+```
+$ bin/setup
+```
+🎉 Now you can use the app!
 
-* ...
