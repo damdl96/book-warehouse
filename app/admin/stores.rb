@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register Store do
   menu priority: 4
 
@@ -25,7 +27,7 @@ ActiveAdmin.register Store do
           end
         end
       else
-        "Store has no inventories."
+        'Store has no inventories.'
       end
     end
   end

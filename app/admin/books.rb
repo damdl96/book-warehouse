@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register Book do
   menu priority: 3
 
@@ -39,7 +41,7 @@ ActiveAdmin.register Book do
           end
         end
       else
-        "Book has no inventories."
+        'Book has no inventories.'
       end
     end
   end

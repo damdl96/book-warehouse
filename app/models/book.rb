@@ -7,7 +7,7 @@ class Book < ApplicationRecord
   has_many :inventories, as: :product, dependent: :destroy
   has_many :stores, through: :inventories
 
-  def self.genres 
+  def self.genres
     distinct.select(:genre).order(:genre).all.pluck(:genre)
   end
 end
