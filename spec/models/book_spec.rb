@@ -54,4 +54,13 @@ RSpec.describe Book, type: :model do
       end
     end
   end
+
+  describe 'class methods' do
+    context '#genres' do
+      let!(:book) { create :book }
+      it 'returns all the book genres available' do
+        expect(Book.genres).to eq [book.genre]
+      end
+    end
+  end
 end
